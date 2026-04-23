@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 
-// Эмуляция компонента Link для корректной работы в превью и в Next.js
+// Эмуляция компонента Link для корректной работы
 const Link = ({ href, children, className, title, onClick }: any) => (
     <a 
         href={href} 
@@ -121,7 +121,6 @@ const DEFAULT_ARTICLES = [
     }
 ];
 
-// Подкомпоненты вынесены наружу для стабильности
 const Navigation = ({ setCurrentPage, setLang, lang, t, cartCount, setIsMenuOpen, isMenuOpen }: any) => (
     <nav className="fixed top-0 w-full z-50 bg-[#F4F4F0]/95 backdrop-blur-md border-b-brutal">
         <div className="w-full px-6 flex justify-between items-center h-16 md:h-20">
