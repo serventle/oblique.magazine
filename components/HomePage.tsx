@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 const fontStyles = `
@@ -73,7 +73,7 @@ const Icon = ({ name, size = 20, className = "" }: {name: string, size?: number,
         case "ArrowRight": return <svg {...props}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>;
         case "ArrowLeft": return <svg {...props}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>;
         case "ShoppingCart": return <svg {...props}><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>;
-        case "Settings": return <svg {...props}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h-.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>;
+        case "Settings": return <svg {...props}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1-1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h-.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>;
         default: return null;
     }
 };
@@ -114,8 +114,7 @@ export function HomePage({ data }: { data: any }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [lang, setLang] = useState('ru');
     
-    // Пока что используем демо-статьи. Как только ты увидишь, что дизайн загрузился, 
-    // мы свяжем этот массив с переменной `data`, которая приходит из Sanity!
+    // Используем демо-данные, пока в Sanity пусто
     const articles = DEFAULT_ARTICLES;
     const t = DICT[lang];
 
@@ -143,7 +142,6 @@ export function HomePage({ data }: { data: any }) {
                         {lang === 'ru' ? 'EN' : 'RU'}
                     </button>
                     
-                    {/* КНОПКА ВХОДА В SANITY STUDIO */}
                     <Link href="/studio" className="opacity-30 hover:opacity-100 transition-opacity hidden md:block" title="Открыть админку Sanity">
                         <Icon name="Settings" size={18} />
                     </Link>
@@ -183,7 +181,6 @@ export function HomePage({ data }: { data: any }) {
                         </div>
                     </div>
                     <div className="w-full lg:w-2/3 relative overflow-hidden group h-[60vh] lg:h-auto order-1 lg:order-2 bg-black cursor-pointer" onClick={() => openArticle(heroArticle.id)}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroArticle.image} alt={heroArticle.title_ru} className="w-full h-full object-cover img-editorial absolute inset-0 opacity-80 group-hover:opacity-100" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-100 group-hover:opacity-80 transition-opacity"></div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
@@ -212,7 +209,6 @@ export function HomePage({ data }: { data: any }) {
                             {gridArticles.map((art) => (
                                 <div key={art.id} className="group cursor-pointer flex flex-col" onClick={() => openArticle(art.id)}>
                                     <div className="relative overflow-hidden aspect-[3/4] border-brutal shadow-brutal mb-6 bg-black">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img src={art.image} alt={getL(art, 'title')} className="w-full h-full object-cover img-editorial opacity-90 group-hover:opacity-100" />
                                         <div className="absolute top-4 left-4 bg-white text-black font-sans font-bold text-[9px] px-3 py-1 tracking-widest uppercase border-brutal group-hover:bg-[#CCFF00]">{getL(art, 'category')}</div>
                                     </div>
@@ -247,7 +243,6 @@ export function HomePage({ data }: { data: any }) {
             <div className="pt-16 md:pt-20 w-full min-h-screen bg-[#F4F4F0]">
                 <div className="flex flex-col lg:flex-row w-full min-h-[calc(100vh-80px)]">
                     <div className="w-full lg:w-1/2 h-[50vh] lg:h-[calc(100vh-80px)] lg:sticky top-20 border-b-brutal lg:border-b-0 lg:border-r-brutal bg-black relative">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={article.image} alt={getL(article, 'title')} className="w-full h-full object-cover img-editorial opacity-90" />
                         <div className="absolute top-6 left-6 bg-[#CCFF00] text-black px-3 py-1 text-[10px] font-sans font-bold tracking-widest uppercase border-brutal">{getL(article, 'category')}</div>
                     </div>
@@ -286,7 +281,6 @@ export function HomePage({ data }: { data: any }) {
                 {articles.map((art, i) => (
                     <div key={art.id} className="group border-b-brutal flex flex-col lg:flex-row cursor-pointer hover:bg-[#F4F4F0] transition-colors" onClick={() => openArticle(art.id)}>
                         <div className="w-full lg:w-1/4 aspect-video lg:aspect-square overflow-hidden border-b-brutal lg:border-b-0 lg:border-r-brutal shrink-0 relative bg-black">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={art.image} alt={getL(art, 'title')} className="w-full h-full object-cover img-editorial opacity-80 group-hover:opacity-100 group-hover:scale-105" />
                             <div className="absolute top-4 left-4 bg-white text-black text-[9px] px-3 py-1 font-bold uppercase tracking-widest font-sans border-brutal">{getL(art, 'category')}</div>
                         </div>
@@ -314,7 +308,6 @@ export function HomePage({ data }: { data: any }) {
                     {shopItems.map((item, idx) => (
                         <div key={item.id} className={`p-8 md:p-16 group flex flex-col hover:bg-[#CCFF00] ${idx !== 0 ? 'border-t-brutal lg:border-t-0 lg:border-l-brutal' : ''}`}>
                             <div className="aspect-square bg-white mb-12 relative overflow-hidden flex items-center justify-center border-brutal shadow-brutal group-hover:shadow-none group-hover:translate-x-1 group-hover:translate-y-1 transition-all">
-                               {/* eslint-disable-next-line @next/next/no-img-element */}
                                <img src={item.image} alt={item.title} className="w-full h-full object-cover mix-blend-multiply img-editorial" />
                             </div>
                             <div className="flex justify-between items-end mt-auto pt-6 border-t-2 border-black">
